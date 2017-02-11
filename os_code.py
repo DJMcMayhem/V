@@ -3,6 +3,8 @@ def get_embedded_nvim_args(args):
         nvim_args = ["nvim.exe", "-n", "-i", "NONE", "-u", "nvim/init.vim"]
     elif args["platform"] == "Linux":
         nvim_args = ["nvim", "-n", "-i", "NONE", "-u", "nvim/init.vim"]
+    elif args["platform"] == "Darwin":
+        nvim_args = ["nvim", "-n", "-i", "NONE", "-u", "nvim/init.vim"]
 
     if args["-w"]:
         nvim_args += ['-W', args["-w"]]
@@ -20,12 +22,16 @@ def get_socket_path(args):
         return "\\\\.\\pipe\\nvim"
     elif args["platform"] == "Linux":
         return "/tmp/nvim"
+    elif args["platform"] == "Darwin":
+        return "/tmp/nvim"
 
 def get_external_nvim_command(args):
     if args["platform"] == "Windows":
         command = "START nvim-qt.exe \\n \\i NONE \\u nvim\\init.vim "
     elif args["platform"] == "Linux":
         command = "xterm -e 'nvim -n -i NONE -u nvim/init.vim "
+    elif args["platform"] == "Darwin":
+        command = "echo 'cd $V;nvim -n -i NONE -u nvim/init.vim "
 
     if args["-w"]:
         command += ' -W {} '.format(args["-w"])
@@ -35,4 +41,6 @@ def get_external_nvim_command(args):
         command += " -Z "
 
     command += "'"
+    if args["platform"] == "Darwin":
+        command += " > run_v.command; chmod +x run_v.command; open run_v.command"
     return command
