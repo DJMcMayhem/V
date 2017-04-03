@@ -122,3 +122,6 @@ nnoremap ú :<C-u>call Sort('n')<cr>
 nnoremap Ú :<C-u>call Sort('n')<cr><cr>
 xnoremap ú :<C-u>call Sort('x')<cr>
 xnoremap Ú :<C-u>call Sort('x')<cr><cr>
+
+nnoremap úú :call setline('.', join(sort(split(getline('.'), '\ze.')), ''))<cr>
+xnoremap úú :call setline('.', join(sort(split(getline('.'), '\ze.')), ''))<cr>
