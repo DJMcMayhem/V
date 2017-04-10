@@ -37,3 +37,6 @@ inoremap ÿ <esc>
 xnoremap ÿ <esc>
 cnoremap ÿ <cr>
 onoremap ÿ _
+
+nnoremap @ÿ @"
+xnoremap @ÿ @"
