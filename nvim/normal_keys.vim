@@ -60,6 +60,11 @@ function! Duplicate(type, ...) range
     let g:paste_num = g:paste_num - 1
   endif
 
+  if col("']") == col('$') - 1 && l:yank_op == 'd' && a:type == 'char'
+    let l:yank_op = 'y'
+    let g:paste_num = g:paste_num - 1
+  endif
+
   if a:0  " Invoked from Visual mode, use gv command.
     silent exe "normal! gv".l:yank_op
   elseif a:type == 'line'
