@@ -16,6 +16,7 @@ source nvim/motions.vim
 source nvim/normal_keys.vim
 source nvim/regex.vim
 source nvim/math.vim
+source nvim/reverse.vim
 
 "Set some settings
 set noautoindent
