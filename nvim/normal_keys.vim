@@ -153,7 +153,6 @@ endfunction
 
 inoremap ¬ <C-o>:call InsertRange('i', v:count1)<cr>
 nnoremap ¬ :call InsertRange('n', v:count1)<cr>
-inoremap 0¬ <C-o>:call InsertRange('i', 0)<cr>
 nnoremap 0¬ :call InsertRange('n', 0)<cr>
 
 nnoremap > :<C-u>exec 'set shiftwidth='.v:count1<cr>>
