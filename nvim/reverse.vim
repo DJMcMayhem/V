@@ -1,27 +1,34 @@
-function! Reverse(type, ...) range
+function! SetReverse()
+  set opfunc=Reverse
+  return 'g@'
+endfunction
+
+function! Reverse(type, ...)
   if a:0  " Invoked from Visual mode, use gv command.
-    if a:1 ==# 'v'
+    if visualmode() ==# 'v'
       normal `<æv`>
-    elseif a:1 ==# 'V'
+    elseif visualmode() ==# 'V'
       normal '<æ'>
+    else
+      let l:start_col = col("'<")
+      let l:end_col = col("'>")
+      exec "'<,'>normal ".l:start_col.'|æv'.l:end_col.'|'
     endif
-    "echo a:1
   elseif a:type == 'line'
-    "echo "Line!"
     if line("'[") == line("']")
       let l:col_num = col('.')
       normal |æ$
     else
       exec "'[,']g/^/m".(line("'[")-1)
     endif
-  "elseif a:type == 'block'
-    "echo "block!"
-    "silent exe "normal! `[\<C-v>`]".l:yank_op
+  elseif a:type == 'block'
+    exe "normal! `[\<C-v>`]"
+    normal æ
   else
     silent exe 'normal! `[v`]y'
     silent exe 'normal! gv"_c'.join(reverse(split(getreg('"'), '\ze.')), '')
   endif
 endfunction
 
-nnoremap <expr> æ ":\<C-u>set opfunc=Reverse\<cr>".v:count1.'g@'
-xnoremap <expr> æ ":call Reverse(visualmode(), '\<C-v>".mode()."')\<CR>"
+nnoremap <expr> æ SetReverse()
+xnoremap æ :<C-u>call Reverse(visualmode(), 1)<cr>
