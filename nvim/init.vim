@@ -39,5 +39,9 @@ xnoremap ÿ <esc>
 cnoremap ÿ <cr>
 onoremap ÿ _
 
+"Set '@' to implicitly run the unnamed register
 nnoremap @ÿ @"
 xnoremap @ÿ @"
+
+"Modify 'matchpairs' so that `<` and `>` are considered matched
+set matchpairs+=<:>
