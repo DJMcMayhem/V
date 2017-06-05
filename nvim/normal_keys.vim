@@ -145,7 +145,9 @@ function! InsertRange(mode, count)
   let l:a = getchar()
   let l:b = getchar()
   let l:stride = a < b ? 1 : -1
-  silent exe "normal! gi\<C-v>".repeat(join(range(l:a, l:b, l:stride), "\<C-v>"), a:count)
+  if a:count
+    echo "normal! gi\<C-v>".repeat(join(range(l:a, l:b, l:stride), "\<C-v>"), a:count)
+  endif
   if a:mode == 'i'
     silent exe "normal! gi"
   endif
