@@ -1,4 +1,4 @@
-let g:RegexShortcuts = {129: '.*', 130: '.+', 131: '.\{-}', 132: '[^', 133: '\ze', 135: '\{-}', 147: '\zs'}
+let g:RegexShortcuts = {129: '.*', 130: '.+', 131: '.\{-}', 132: '[^', 133: '\ze', 135: '\{-}', 136: '\(.\)', 147: '\zs'}
 
 function! GetRegex(slashCount)
   let c = getchar()
@@ -60,19 +60,17 @@ function! Substitute(com, global, mode)
     let command .= 'g'
   endif
 
-  echo a:com.command
-
-  call feedkeys(a:com.command."\<CR>", "in")
+  call feedkeys(":".a:com.command."\<CR>", "in")
 endfunction
 
-nnoremap ó :<C-u>call Substitute(":s/", 0, 'n')<CR>
-nnoremap Ó :<C-u>call Substitute(":s/", 1, 'n')<CR>
-nnoremap í :<C-u>call Substitute(":%s/", 0, 'n')<CR>
-nnoremap Í :<C-u>call Substitute(":%s/", 1, 'n')<CR>
-xnoremap ó :<C-u>call Substitute(":'<,'>s/\%V", 0, 'x')<CR>
-xnoremap Ó :<C-u>call Substitute(":'<,'>s/\%V", 1, 'x')<CR>
-xnoremap í :<C-u>call Substitute(":'<,'>s/", 0, 'x')<CR>
-xnoremap Í :<C-u>call Substitute(":'<,'>s/", 1, 'x')<CR>
+nnoremap ó :<C-u>call Substitute("s/", 0, 'n')<CR>
+nnoremap Ó :<C-u>call Substitute("s/", 1, 'n')<CR>
+nnoremap í :<C-u>call Substitute("%s/", 0, 'n')<CR>
+nnoremap Í :<C-u>call Substitute("%s/", 1, 'n')<CR>
+xnoremap ó :<C-u>call Substitute("'<,'>s/\%V", 0, 'x')<CR>
+xnoremap Ó :<C-u>call Substitute("'<,'>s/\%V", 1, 'x')<CR>
+xnoremap í :<C-u>call Substitute("'<,'>s/", 0, 'x')<CR>
+xnoremap Í :<C-u>call Substitute("'<,'>s/", 1, 'x')<CR>
 
 function! Global(com)
   let info = GetRegex(1)
