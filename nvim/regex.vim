@@ -123,3 +123,26 @@ xnoremap Ú :<C-u>call Sort('x')<cr><cr>
 
 nnoremap úú :call setline('.', join(sort(split(getline('.'), '\ze.')), ''))<cr>
 xnoremap úú :call setline('.', join(sort(split(getline('.'), '\ze.')), ''))<cr>
+
+function! Count(global, count)
+  let l:info = GetRegex(1)
+  let l:command = info[0]
+
+  if a:global
+    let l:text = join(getline(1, '$'), "\n")
+  else
+    let l:text = join(getline(line('.'), line('.') + a:count - 1), "\n")
+  endif
+
+  let l:nmatches = len(split(l:text, l:command, 1)) - 1
+  if a:global
+    silent exe "normal! ggVG"
+  else
+    silent exe "normal! V".a:count."_"
+  endif
+
+  silent exe "normal! c".l:nmatches
+endfunction
+
+nnoremap ø :<C-u>call Count(0, v:count1)<CR>
+nnoremap Ø :<C-u>call Count(1, v:count1)<CR>
