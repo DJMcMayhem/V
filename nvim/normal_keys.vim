@@ -141,6 +141,17 @@ inoremap <expr> · RepCharInsert(7)
 inoremap <expr> ¸ RepCharInsert(8)
 inoremap <expr> ¹ RepCharInsert(9)
 
+nnoremap <expr> ° "i".RepCharInsert(0)."\<esc>"
+nnoremap <expr> ± "i".RepCharInsert(1)."\<esc>"
+nnoremap <expr> ² "i".RepCharInsert(2)."\<esc>"
+nnoremap <expr> ³ "i".RepCharInsert(3)."\<esc>"
+nnoremap <expr> ´ "i".RepCharInsert(4)."\<esc>"
+nnoremap <expr> µ "i".RepCharInsert(5)."\<esc>"
+nnoremap <expr> ¶ "i".RepCharInsert(6)."\<esc>"
+nnoremap <expr> · "i".RepCharInsert(7)."\<esc>"
+nnoremap <expr> ¸ "i".RepCharInsert(8)."\<esc>"
+nnoremap <expr> ¹ "i".RepCharInsert(9)."\<esc>"
+
 function! InsertRange(mode, count)
   let l:a = getchar()
   let l:b = getchar()
