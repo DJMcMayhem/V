@@ -127,7 +127,7 @@ function! RepCharInsert(n)
     let l:rep_count = 10
   endif
 
-  return repeat(l:c, a:n)
+  return repeat(l:c, l:rep_count)
 endfunction
 
 inoremap <expr> ° RepCharInsert(0)
