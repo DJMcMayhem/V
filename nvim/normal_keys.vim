@@ -147,7 +147,7 @@ function! InsertRange(mode, count)
   let l:stride = a < b ? 1 : -1
 
   if a:count
-    exec "normal! gi\<C-v>".repeat(join(range(l:a, l:b, l:stride), "\<C-v>"), a:count)
+    exec "normal! gi\<C-v>".join(repeat(range(l:a, l:b, l:stride), a:count), "\<C-v>")
   endif
   if a:mode == 'i'
     silent exe "normal! gi"
@@ -155,7 +155,7 @@ function! InsertRange(mode, count)
 endfunction
 
 inoremap ¬ <C-o>:call InsertRange('i', v:count1)<cr>
-nnoremap ¬ :call InsertRange('n', v:count1)<cr>
+nnoremap ¬ :<C-u>call InsertRange('n', v:count1)<cr>
 nnoremap 0¬ :call InsertRange('n', 0)<cr>
 
 nnoremap > :<C-u>exec 'set shiftwidth='.v:count1<cr>>
