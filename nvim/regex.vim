@@ -1,4 +1,4 @@
-let g:RegexShortcuts = {129: '.*', 130: '.+', 131: '.\{-}', 132: '[^', 133: '\ze', 135: '\{-}', 136: '\(.\)', 147: '\zs'}
+let g:RegexShortcuts = {129: '.*', 130: '.\+', 131: '.\{-}', 132: '[^', 133: '\ze', 135: '\{-}', 136: '\(.\)', 147: '\zs'}
 
 function! GetRegex(slashCount)
   let c = getchar()
