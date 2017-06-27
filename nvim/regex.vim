@@ -125,23 +125,20 @@ nnoremap úú :call setline('.', join(sort(split(getline('.'), '\ze.')), ''))<cr
 xnoremap úú :call setline('.', join(sort(split(getline('.'), '\ze.')), ''))<cr>
 
 function! Count(global, count)
-  let l:info = GetRegex(1)
-  let l:command = info[0]
+  let l:command = GetRegex(1)[0]
 
-  if a:global
-    let l:text = join(getline(1, '$'), "\n")
-  else
-    let l:text = join(getline(line('.'), line('.') + a:count - 1), "\n")
-  endif
+  redir => l:result
+  silent exec (a:global ? '%' : '.,.+'.(a:count-1)).'s/'.l:command.'//gn'
+  redir END
+  let l:nmatches = split(l:result, '\D')[0]
 
-  let l:nmatches = len(split(l:text, l:command, 1)) - 1
   if a:global
     silent exe "normal! ggVG"
   else
     silent exe "normal! V".a:count."_"
   endif
 
-  silent exe "normal! c".l:nmatches
+  silent exe "normal! |c".l:nmatches
 endfunction
 
 nnoremap ø :<C-u>call Count(0, v:count1)<CR>
