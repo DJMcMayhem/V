@@ -124,22 +124,40 @@ xnoremap Ú :<C-u>call Sort('x')<cr><cr>
 nnoremap úú :call setline('.', join(sort(split(getline('.'), '\ze.')), ''))<cr>
 xnoremap úú :call setline('.', join(sort(split(getline('.'), '\ze.')), ''))<cr>
 
-function! Count(global, count)
+function! Count(mode, count)
   let l:command = GetRegex(1)[0]
 
-  redir => l:result
-  silent exec (a:global ? '%' : '.,.+'.(a:count-1)).'s/'.l:command.'//gn'
-  redir END
-  let l:nmatches = split(l:result, '\D')[0]
+  if a:mode == 'line'
+    let l:prefix = '.,.+'.(a:count-1)
+  elseif a:mode == 'buffer'
+    let l:prefix = '%'
+  elseif a:mode == 'visual'
+    let l:prefix = "'<,'>"
+    let l:command = '\%V'.l:command
+  endif
 
-  if a:global
-    silent exe "normal! ggVG"
+  redir => l:result
+  silent! exec l:prefix.'s/'.l:command.'//gn'
+  redir END
+
+  if l:result =~? 'error'
+    let l:nmatches = 0
   else
+    let l:nmatches = split(l:result, '\D')[0]
+  endif
+
+  if a:mode == 'line'
     silent exe "normal! V".a:count."_"
+  elseif a:mode == 'buffer'
+    normal! ggVG
+  else
+    normal gv
   endif
 
   silent exe "normal! |c".l:nmatches
 endfunction
 
-nnoremap ø :<C-u>call Count(0, v:count1)<CR>
-nnoremap Ø :<C-u>call Count(1, v:count1)<CR>
+nnoremap ø :<C-u>call Count('line', v:count1)<CR>
+nnoremap Ø :<C-u>call Count('buffer', v:count1)<CR>
+xnoremap ø :<C-u>call Count('visual', v:count1)<CR>
+xnoremap Ø V:<C-u>call Count('visual', v:count1)<CR>
