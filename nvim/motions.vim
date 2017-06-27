@@ -25,6 +25,7 @@ onoremap <expr> M ((line('$') + 1) / 2).'G'
 
 nnoremap H gg
 xnoremap H gg
+onoremap H gg
 
 "Execute a motion on the 'next' text object
 onoremap an :<c-u>call <SID>NextTextObject('a')<cr>
