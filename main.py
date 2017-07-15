@@ -75,10 +75,10 @@ def main():
         sys.stderr.write("Hexdump:\n")
         xxd = subprocess.Popen("xxd", stdout=sys.stderr, stdin=subprocess.PIPE)
         xxd.communicate(source.original_source.encode("latin1"))
+        sys.stderr.write("\n")
 
     buf = v_instance.get_buffer()
     output = "\n".join(buf)
-    sys.stderr.write("\nOutput:\n")
     print(output, end="")
 
     v_instance.close()

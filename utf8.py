@@ -38,7 +38,7 @@ class enc_safe_file():
             yield get_encoded_command(com, self.verbose)
 
         if self.verbose:
-            sys.stderr.write("\n")
+            sys.stderr.write("\n\n")
 
 def get_encoded_command(com, verbose = False):
     if len(com) == 1:
