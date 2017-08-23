@@ -19,17 +19,18 @@ xnoremap <expr> Û line('.')
 inoremap <expr> Û line('.')
 cnoremap <expr> Û line('.')
 "<M-]>, current column
-nnoremap <expr> Ý getcurpos('.')[2]
-xnoremap <expr> Ý getcurpos('.')[2]
-inoremap <expr> Ý getcurpos('.')[2]
-cnoremap <expr> Ý getcurpos('.')[2]
+nnoremap <expr> Ý getpos('.')[2]
+xnoremap <expr> Ý getpos('.')[2]
+inoremap <expr> Ý getpos('.')[2]
+cnoremap <expr> Ý getpos('.')[2]
 "<M-{>, number of lines (in the buffer)
 nnoremap <expr> û line('$')
 xnoremap <expr> û line('$')
 inoremap <expr> û line('$')
 cnoremap <expr> û line('$')
 "<M-}>, number of columns (in the current line)
-nnoremap <expr> ý getcurpos('$')[2]
-xnoremap <expr> ý getcurpos('$')[2]
-inoremap <expr> ý getcurpos('$')[2]
-cnoremap <expr> ý getcurpos('$')[2]
+nnoremap <expr> ý strwidth(getline('.')) + 1
+xnoremap <expr> ý strwidth(getline('.')) + 1
+inoremap <expr> ý strwidth(getline('.')) + 1
+cnoremap <expr> ý strwidth(getline('.')) + 1
+
