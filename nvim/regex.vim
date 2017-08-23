@@ -1,8 +1,9 @@
 let g:RegexShortcuts = {129: '.*', 130: '.\+', 131: '.\{-}', 132: '[^', 133: '\ze', 135: '\{-}', 136: '\(.\)', 147: '\zs'}
+
 nnoremap <leader>ó :s/./&\r/g<cr>
 xnoremap <leader>ó :s/./&\r/g<cr>
-nnoremap <leader>Ó :s/./&\r/g<cr>kgJ
-xnoremap <leader>Ó :s/./&\r/g<cr>kgJ
+nnoremap <leader>Ó :s/.\ze./&\r/g<cr>
+xnoremap <leader>Ó :s/.\ze./&\r/g<cr>
 
 function! GetRegex(slashCount)
   let c = getchar()
