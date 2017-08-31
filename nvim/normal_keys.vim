@@ -76,7 +76,7 @@ function! Duplicate(type, ...) range
   endif
 
   if g:paste_num > 0
-    silent exe "normal! ".g:paste_num."P"
+    silent exe "normal! ".repeat("P", g:paste_num)
   elseif g:paste_num == -1
     silent exe "normal! "."P"
   endif
