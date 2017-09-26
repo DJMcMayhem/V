@@ -29,8 +29,8 @@ xnoremap <expr> û line('$')
 inoremap <expr> û line('$')
 cnoremap <expr> û line('$')
 "<M-}>, number of columns (in the current line)
-nnoremap <expr> ý strwidth(getline('.')) + 1
-xnoremap <expr> ý strwidth(getline('.')) + 1
-inoremap <expr> ý strwidth(getline('.')) + 1
-cnoremap <expr> ý strwidth(getline('.')) + 1
+nnoremap <expr> ý strwidth(getline('.'))
+xnoremap <expr> ý strwidth(getline('.'))
+inoremap <expr> ý strwidth(getline('.'))
+cnoremap <expr> ý strwidth(getline('.'))
 
