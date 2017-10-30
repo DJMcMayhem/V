@@ -72,10 +72,11 @@ def main():
     v_instance.clean_up()
 
     if args['--hexdump']:
-        sys.stderr.write("Hexdump:\n")
-        xxd = subprocess.Popen("xxd", stdout=sys.stderr, stdin=subprocess.PIPE)
-        xxd.communicate(source.original_source.encode("latin1"))
-        sys.stderr.write("\n")
+        sys.stderr.write("Hexdump:\n\n")
+        xxd = subprocess.Popen("xxd", stdout=subprocess.PIPE, stdin=subprocess.PIPE)
+        out, err = xxd.communicate(source.original_source.encode("latin1"))
+        for line in out.split('\n'):
+            sys.stderr.write('    ' + line + '\n')
 
     buf = v_instance.get_buffer()
     output = "\n".join(buf)
