@@ -132,6 +132,10 @@ xnoremap úú :call setline('.', join(sort(split(getline('.'), '\ze.')), ''))<cr
 function! Count(mode, count)
   let l:command = GetRegex(1)[0]
 
+  let l:command = substitute(l:command, "\<C-r>\\(\\a\\)", "\\=getreg(submatch(1))", "")
+  echo l:command
+  call getchar()
+
   if a:mode == 'line'
     let l:prefix = '.,.+'.(a:count-1)
   elseif a:mode == 'buffer'
@@ -142,7 +146,7 @@ function! Count(mode, count)
   endif
 
   redir => l:result
-  silent! exec l:prefix.'s/'.l:command.'//gn'
+    silent! exec l:prefix.'s/'.l:command.'//gn'
   redir END
 
   if l:result =~? 'error'
