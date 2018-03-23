@@ -133,8 +133,6 @@ function! Count(mode, count)
   let l:command = GetRegex(1)[0]
 
   let l:command = substitute(l:command, "\<C-r>\\(\\a\\)", "\\=getreg(submatch(1))", "")
-  echo l:command
-  call getchar()
 
   if a:mode == 'line'
     let l:prefix = '.,.+'.(a:count-1)
