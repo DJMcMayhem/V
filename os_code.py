@@ -4,14 +4,14 @@ def get_embedded_nvim_args(args):
     elif args["platform"] == "Linux":
         nvim_args = ["nvim", "-n", "-i", "NONE", "-u", "nvim/init.vim"]
 
+    nvim_args += ["--embed"]
+
     if args["-w"]:
         nvim_args += ['-W', args["-w"]]
     if args["-f"]:
         nvim_args += [args["-f"]]
     if args["--safe"]:
         nvim_args += ["-Z"]
-
-    nvim_args += ["--embed"]
 
     return nvim_args
 

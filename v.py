@@ -51,7 +51,7 @@ class V:
         if key in self.input_mappings:
             key = self.input_mappings[key]
         self.nvim_instance.input(key)
-        time.sleep(0.1)
+        #time.sleep(0.1)
 
         if self.args["-s"]:
             time.sleep(self.args["-s"])
