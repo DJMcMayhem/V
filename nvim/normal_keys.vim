@@ -188,6 +188,10 @@ nnoremap ¯ ^lx>>
 "<M-R>, or (R)eplace. Useful for replacing an entire line with another
 "character.
 nnoremap Ò Vr
+nnoremap <expr> Ñ g:num_regs
+xnoremap <expr> Ñ g:num_regs
+cnoremap <expr> Ñ g:num_regs
+inoremap <expr> Ñ g:num_regs
 
 "Mapping to ':norm' and ':%norm'
 nnoremap î :norm<space>
