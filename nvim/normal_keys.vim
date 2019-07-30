@@ -194,12 +194,12 @@ cnoremap <expr> Ñ g:num_regs
 inoremap <expr> Ñ g:num_regs
 
 "Mapping to ':norm' and ':%norm'
-nnoremap î :norm<space>
-nnoremap Î :%norm<space>
-xnoremap î :norm<space>
-xnoremap Î :%norm<space>
-cnoremap î norm<space>
-cnoremap Î %norm<space>
+nnoremap î :norm<space>ÿ<Left>
+nnoremap Î :%norm<space>ÿ<Left>
+xnoremap î :norm<space>ÿ<Left>
+xnoremap Î :%norm<space>ÿ<Left>
+cnoremap î norm<space>ÿ<Left>
+cnoremap Î %norm<space>ÿ<Left>
 
 "Mapping reverse indent mode
 inoremap <C-_> <C-o>:se ri!<cr>
