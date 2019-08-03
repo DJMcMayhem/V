@@ -38,7 +38,7 @@ def main():
     if args["ARGUMENTS"][:1] == ['--']:
         args["ARGUMENTS"] = args["ARGUMENTS"][1:]
 
-    if args["-s"] != None:    
+    if args["-s"] != None:
         if args["-s"].isdigit():
             args["-s"] = int(args["-s"]) / 100.0
         else:
