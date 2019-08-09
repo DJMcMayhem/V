@@ -1,3 +1,4 @@
 #Ignore `.v` files and `.pyc` files
 *.pyc
 *.v
+*.txt

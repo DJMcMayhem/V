@@ -49,28 +49,21 @@ xnoremap @ÿ @"
 set matchpairs+=<:>
 
 function! Execute_Program(source)
-	echo a:source
-	let l:source_list = readfile(a:source, 'b')
+  let l:source_list = readfile(a:source, 'b')
 
-	let l:line_num = 1
-	for s:line in l:source_list
-		for s:c in split(s:line, '\zs')
-			call feedkeys(s:c, 't')
-		endfor
+  let l:line_num = 1
+  for s:line in l:source_list
+    for s:c in split(s:line, '\zs')
+      call feedkeys(s:c, 't')
+    endfor
 
-		if l:line_num < len(l:source_list)
-			call feedkeys("\<CR>", 't')
-		endif
+    if l:line_num < len(l:source_list)
+      call feedkeys("\<CR>", 't')
+    endif
 
-		let l:line_num += 1
-	endfor
+    let l:line_num += 1
+  endfor
 
-	call feedkeys('ÿÿÿ', 'tx')
-
-"  for s:c in split(a:source, '\zs')
-"    call feedkeys(s:c)
-"  endfor
-"
-"  call feedkeys('', 'x')
+  call feedkeys('ÿÿÿ', 'tx')
 endfunction
 
