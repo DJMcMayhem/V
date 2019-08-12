@@ -48,12 +48,20 @@ xnoremap @ÿ @"
 "Modify 'matchpairs' so that `<` and `>` are considered matched
 set matchpairs+=<:>
 
-function! Execute_Program(source)
+function! Execute_Program(source, verbose)
+  let l:split = '\zs'
+  if a:verbose == 1
+    let l:split = '\v\c(\<esc\>|\<cr\>|\<rb\>|\<lb\>|\<bs\>|\<del\>|\<C-.\>|\<M-.\>|.)\zs'
+  endif
+
   let l:source_list = readfile(a:source, 'b')
 
   let l:line_num = 1
   for s:line in l:source_list
-    for s:c in split(s:line, '\zs')
+    for s:c in split(s:line, l:split)
+       if strlen(s:c) > 1
+         exec 'let s:c = "\'.s:c.'"'
+       endif
       call feedkeys(s:c, 't')
     endfor
 
