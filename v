@@ -19,11 +19,18 @@ vim_cmds=()
 file=""
 newline=false
 verbose=0
+hexdump=0
+keystroke_file=""
 
 while getopts "vnhxf:" arg; do
   case $arg in
     v)
       verbose=1
+      ;;
+    x)
+      hexdump=true
+      keystroke_file=$(mktemp v.XXXX --tmpdir)
+      vim_cmds+=(-W $keystroke_file)
       ;;
     f)
       vim_cmds+=($OPTARG)
@@ -43,7 +50,13 @@ if [ "$#" == 0 ] ; then
     help
 fi
 
-vim -nes "${vim_cmds[@]}" -u vim/init.vim -c "call Execute_Program('$1', '$verbose')" -c ":%p" -c ":q!" | head -c -1
+vim -nes "${vim_cmds[@]}" -u vim/init.vim -c "call Execute_Program('$1', '$verbose')" -c "%p" -c "q!" | head -c -1
+
+if [ "$hexdump" = true ] ; then
+  # Convert the keystroke file
+  echo -e "\n\nHexdump:\n"
+  vim -u NONE -Nnes $keystroke_file -c "se fenc=latin1" -c "se binary" -c 'w' -c 'normal G$xxx' -c '1,$!xxd' -c '%norm 4I ' -c "%p" -c "q!"
+fi
 
 if [ "$newline" = true ] ; then
   echo ""
