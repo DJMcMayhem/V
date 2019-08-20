@@ -48,6 +48,12 @@ xnoremap @ÿ @"
 "Modify 'matchpairs' so that `<` and `>` are considered matched
 set matchpairs+=<:>
 
+function! Set_Arg(string)
+  let l:next_reg = nr2char(g:num_regs + char2nr('a'))
+  call setreg(l:next_reg, a:string)
+  let g:num_regs += 1
+endfunction
+
 function! Execute_Program(source, verbose)
   let l:split = '\zs'
   if a:verbose == 1
