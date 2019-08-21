@@ -2,7 +2,7 @@
 
 An esoteric language inspired by vim and designed for code-golfing. Get started at the [wiki](https://github.com/DJMcMayhem/V/wiki), or you can try it in the online interpreter [here.](http://v.tryitonline.net/) (Online interpreter provided by [Dennis Mitchell](http://codegolf.stackexchange.com/users/12012/dennis))
 
-Under the hood, V sends out keystrokes to neovim for all of it's text manipulations, and it tries to be mostly backwards compatible with regular vim. The main reason this language was invented was to fix my biggest complaints with using vim as a golfing language, rather than a text editor:
+V is really just a fancy way to call vim like it's a scripting language, with a bunch of settings and mappings preloaded. The main reason this language was invented was to fix my biggest complaints with using vim as a golfing language, rather than a text editor:
 
  - Input and output is obnoxious. In vim golf, you must enter the text into a file, open with file in vim with no loaded settings, and then *manually* type each keystroke to execute it. Output is to the buffer, not to STDIO
 
