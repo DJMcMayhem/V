@@ -52,6 +52,8 @@ function! Set_Arg(string)
 endfunction
 
 function! Execute_Program(source, verbose)
+  normal! gg
+
   let l:split = '\zs'
   if a:verbose == 1
     let l:split = '\v\c(\<esc\>|\<cr\>|\<rb\>|\<lb\>|\<bs\>|\<del\>|\<C-.\>|\<M-.\>|.)\zs'
