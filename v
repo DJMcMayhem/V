@@ -16,6 +16,7 @@ Options:
 }
 
 vim_cmds=()
+args=()
 file=""
 newline=false
 verbose=0
@@ -50,7 +51,19 @@ if [ "$#" == 0 ] ; then
     help
 fi
 
-vim -nes "${vim_cmds[@]}" -u vim/init.vim -c "call Execute_Program('$1', '$verbose')" -c "%p" -c "q!" | head -c -1
+function vim_escape () {
+  printf '"'
+  for (( i=0; i<${#1}; i++ )); do
+    printf '\\x%x' "'${1:$i:1}";
+  done
+  printf '"'
+}
+
+for (( i=2; i<$#+1; i++ )); do
+  args+=(-c 'call Set_Arg('$(vim_escape "${!i}")')')
+done
+
+vim -nes "${vim_cmds[@]}" -u vim/init.vim -i NONE "${args[@]}" -c "call Execute_Program('$1', '$verbose')" -c "%p" -c "q!" | head -c -1
 
 if [ "$hexdump" = true ] ; then
   # Convert the keystroke file
