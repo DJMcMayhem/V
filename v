@@ -2,7 +2,7 @@
 
 function help {
     echo "Usage:
-  V [options] source [ARGUMENTS ... ]
+  V source [OPTIONS] [ARGUMENTS ... ]
 
 Options:
   -v        Run in verbose mode
@@ -10,8 +10,6 @@ Options:
   -x        Print a hexdump of the source file encoded in latin1 to STDERR
   -n        Add a trailing newline to the output
   -f FILE   Open with FILE for input
-  -s TIME   Deprecated
-  -w FILE   Deprecated
 "
 
   exit
@@ -24,6 +22,13 @@ newline=false
 verbose=0
 hexdump=0
 keystroke_file=""
+
+if [ "$#" == 0 ] ; then
+    help
+fi
+
+source="$1"
+shift 1
 
 while getopts "vnhxf:s:w:" arg; do
   case $arg in
@@ -55,10 +60,6 @@ done
 
 shift $(($OPTIND-1))
 
-if [ "$#" == 0 ] ; then
-    help
-fi
-
 function vim_escape () {
   printf '"'
   for (( i=0; i<${#1}; i++ )); do
@@ -67,11 +68,11 @@ function vim_escape () {
   printf '"'
 }
 
-for (( i=2; i<$#+1; i++ )); do
+for (( i=1; i<$#+1; i++ )); do
   args+=(-c 'call Set_Arg('$(vim_escape "${!i}")')')
 done
 
-vim -nes "${vim_cmds[@]}" -u vim/init.vim -i NONE "${args[@]}" -c "call Execute_Program('$1', '$verbose')" -c "%p" -c "q!" | head -c -1
+vim -nes "${vim_cmds[@]}" -u vim/init.vim -i NONE "${args[@]}" -c "call Execute_Program('$source', '$verbose')" -c "%p" -c "q!" | head -c -1
 
 if [ "$hexdump" = true ] ; then
   # Convert the keystroke file
