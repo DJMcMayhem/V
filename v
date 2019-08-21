@@ -10,6 +10,8 @@ Options:
   -x        Print a hexdump of the source file encoded in latin1 to STDERR
   -n        Add a trailing newline to the output
   -f FILE   Open with FILE for input
+  -s TIME   Deprecated
+  -w FILE   Deprecated
 "
 
   exit
@@ -23,7 +25,7 @@ verbose=0
 hexdump=0
 keystroke_file=""
 
-while getopts "vnhxf:" arg; do
+while getopts "vnhxf:s:w:" arg; do
   case $arg in
     v)
       verbose=1
@@ -41,6 +43,12 @@ while getopts "vnhxf:" arg; do
       ;;
     h)
       help
+      ;;
+    s)
+      >&2 echo "The -s flag is deprecated."
+      ;;
+    w)
+      >&2 echo "The -w flag is deprecated."
       ;;
   esac
 done
@@ -67,8 +75,8 @@ vim -nes "${vim_cmds[@]}" -u vim/init.vim -i NONE "${args[@]}" -c "call Execute_
 
 if [ "$hexdump" = true ] ; then
   # Convert the keystroke file
-  echo -e "\n\nHexdump:\n"
-  vim -u NONE -Nnes $keystroke_file -c "se fenc=latin1" -c "se binary" -c 'w' -c 'normal G$xxx' -c '1,$!xxd' -c '%norm 4I ' -c "%p" -c "q!"
+  >&2 echo -e "\n\nHexdump:\n"
+  >&2 vim -u NONE -Nnes $keystroke_file -c "se fenc=latin1" -c "se binary" -c 'w' -c 'normal G$xxx' -c '1,$!xxd' -c '%norm 4I ' -c "%p" -c "q!"
 fi
 
 if [ "$newline" = true ] ; then
