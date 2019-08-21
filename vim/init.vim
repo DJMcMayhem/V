@@ -1,6 +1,3 @@
-"Set all settings to default
-set all&
-
 se nocompatible
 
 "Change runtime path
