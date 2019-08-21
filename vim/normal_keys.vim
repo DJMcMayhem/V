@@ -21,7 +21,7 @@ function! RecordQ(count)
   endwhile
   let @q=text.nr2char(255)
   if a:count
-    call feedkeys(a:count."@q")
+    call feedkeys(a:count."@q", 'i')
   endif
 endfunction
 
@@ -37,7 +37,7 @@ function! RecursiveQ(count)
   endwhile
   let @q=text.nr2char(255)."@q"
   if a:count
-    call feedkeys("@q")
+    call feedkeys("@q", 'i')
   endif
 endfunction
 
@@ -92,7 +92,7 @@ nnoremap Ù :<C-u>exec 'norm Y'.v:count.'p'<cr>
 nnoremap 0Ù dd
 
 let g:active_reg = 0
-let g:num_regs = 1
+let g:num_regs = 0
 
 function! NextActiveRegister(BaseCommand)
   echo a:BaseCommand
