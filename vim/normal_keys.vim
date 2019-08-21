@@ -92,7 +92,7 @@ nnoremap Ù :<C-u>exec 'norm Y'.v:count.'p'<cr>
 nnoremap 0Ù dd
 
 let g:active_reg = 0
-let g:num_regs = 1
+let g:num_regs = 0
 
 function! NextActiveRegister(BaseCommand)
   echo a:BaseCommand
