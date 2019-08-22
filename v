@@ -72,7 +72,7 @@ for (( i=1; i<$#+1; i++ )); do
   args+=(-c 'call Set_Arg('$(vim_escape "${!i}")')')
 done
 
-vim -nes "${vim_cmds[@]}" -u vim/init.vim -i NONE "${args[@]}" -c "call Execute_Program('$source', '$verbose')" -c "%p" -c "q!" | head -c -1
+vim -nes "${vim_cmds[@]}" -u "$(dirname -- "$(readlink -e -- "$0")")/vim/init.vim" -i NONE "${args[@]}" -c "call Execute_Program('$source', '$verbose')" -c "%p" -c "q!" | head -c -1
 
 if [ "$hexdump" = true ] ; then
   # Convert the keystroke file
