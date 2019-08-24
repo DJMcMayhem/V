@@ -1,4 +1,7 @@
-se nocompatible
+set nocompatible
+
+set noerrorbells
+set vb t_vb=
 
 "Change runtime path
 exe 'set rtp-=' . expand('~/.config/vim')
