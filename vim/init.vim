@@ -4,21 +4,21 @@ set noerrorbells
 set vb t_vb=
 
 "Change runtime path
-exe 'set rtp-=' . expand('~/.config/vim')
-exe 'set rtp-=' . expand('~/.config/vim/after')
-exe 'set rtp+=' . expand('$V/vim')
-exe 'set rtp+=' . expand('$V/vim/after')
+exe 'set rtp-='.expand('~/.config/vim')
+exe 'set rtp-='.expand('~/.config/vim/after')
+exe 'set rtp+='.expand('$V/vim')
+exe 'set rtp+='.expand('$V/vim/after')
 
 "Load plugins
-source vim/plugin/surround.vim
-source vim/plugin/exchange.vim
+runtime plugin/surround.vim
+runtime plugin/exchange.vim
 
 "Source V specific source files
-source vim/motions.vim
-source vim/normal_keys.vim
-source vim/regex.vim
-source vim/math.vim
-source vim/reverse.vim
+runtime motions.vim
+runtime normal_keys.vim
+runtime regex.vim
+runtime math.vim
+runtime reverse.vim
 
 "Set some settings
 set noautoindent
