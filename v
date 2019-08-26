@@ -5,6 +5,7 @@ function help {
   V source [OPTIONS] [ARGUMENTS ... ]
 
 Options:
+  -V        Show warnings from vim
   -v        Run in verbose mode
   -h        Show this screen.
   -x        Print a hexdump of the source file encoded in latin1 to STDERR
@@ -30,10 +31,13 @@ fi
 source="$1"
 shift 1
 
-while getopts "vnhxf:s:w:" arg; do
+while getopts "Vvnhxf:s:w:" arg; do
   case $arg in
     v)
       verbose=1
+      ;;
+    V)
+      vim_cmds+=(-V2 )
       ;;
     x)
       hexdump=true
